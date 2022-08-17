@@ -378,7 +378,7 @@ macro_rules! slog_o(
 #[macro_export(local_inner_macros)]
 macro_rules! b(
     ($($args:tt)*) => {
-        $crate::BorrowedKV(&kv!($($args)*))
+        $crate::BorrowedKV(&kv!("thread_id" => ?::std::thread::current().id(), $($args)*))
     };
 );
 
@@ -386,7 +386,7 @@ macro_rules! b(
 #[macro_export(local_inner_macros)]
 macro_rules! slog_b(
     ($($args:tt)*) => {
-        $crate::BorrowedKV(&slog_kv!($($args)*))
+        $crate::BorrowedKV(&slog_kv!("thread_id" => ?::std::thread::current().id(), $($args)*))
     };
 );
 
